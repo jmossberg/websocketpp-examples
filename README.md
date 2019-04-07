@@ -1,5 +1,10 @@
 # websocketpp-examples
-Examples client and servers using WebSocket++ C++ header only library
+Examples using WebSocket++ C++ header only library
+
+1. Minimalistic client and server
+1. Command line based chat client and server
+
+# Contents
 
 # Alternative 1: How to build WebSocket++ examples using Docker
 
