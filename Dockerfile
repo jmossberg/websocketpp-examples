@@ -1,7 +1,9 @@
 FROM ubuntu:18.04
 
-RUN apt-get update
-RUN apt-get install -y g++ make openssl libssl-dev wget
+#Install toolchain  
+COPY install_tools.sh .
+RUN chmod +x install_tools.sh
+RUN ./install_tools.sh
 
 #Set variables
 ARG username=cpp_user
