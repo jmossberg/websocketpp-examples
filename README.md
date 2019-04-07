@@ -1,9 +1,10 @@
 # websocketpp-examples
 Examples client and servers using WebSocket++ C++ header only library
 
-# How to run examples using Docker
+# Alternative 1: How to build WebSocket++ examples using Docker
 
 1. Install Docker: https://docs.docker.com/install/
+
 1. Clone this repository
 
         $ cd ~/git
@@ -16,6 +17,41 @@ Examples client and servers using WebSocket++ C++ header only library
 1. Build docker image with name `docker_websocketpp`
 
         $ ./docker_websocketpp.sh build
+
+# Alternative 2: How to build WebSocket++ examples on Ubuntu 18.04 without Docker
+
+1. Clone this repository
+
+        $ cd ~/git
+        $ git clone https://github.com/jmossberg/websocketpp-examples.git
+
+1. Make shell scripts executable
+
+        $ chmod +x *.sh
+
+1. Install tools
+
+        $ sudo ./install_tools.sh
+
+1. Install boost
+
+        $ ./install_boost.sh 1.67.0
+
+1. Download WebSocket++
+
+        $ ./download_websocketpp.sh 0.8.1
+
+1. Create certificate to enable TLS encryption
+
+        $ ./create_certificate.sh
+
+1. Build examples
+
+        $ make websocketpp_examples 
+
+# How to run WebSocket++ examples
+
+The examples below assume alternative 1 above was used, i.e. using Docker. Running the examples without Docker is similar.
 
 1. Start docker container and start the minimalistic server
 
@@ -101,33 +137,3 @@ Examples client and servers using WebSocket++ C++ header only library
         hello from Elsa
         < Anna: hello from Anna
 
-# How to run examples on Ubuntu 18.04 without Docker
-
-1. Clone this repository
-
-        $ cd ~/git
-        $ git clone https://github.com/jmossberg/websocketpp-examples.git
-
-1. Make shell scripts executable
-
-        $ chmod +x *.sh
-
-1. Install tools
-
-        $ sudo ./install_tools.sh
-
-1. Install boost
-
-        $ ./install_boost.sh 1.67.0
-
-1. Download WebSocket++
-
-        $ ./download_websocketpp.sh 0.8.1
-
-1. Create certificate to enable TLS encryption
-
-        $ ./create_certificate.sh
-
-1. Build examples
-
-        $ make websocketpp_examples 
