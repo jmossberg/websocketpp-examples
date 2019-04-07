@@ -9,6 +9,7 @@ Examples client and servers using WebSocket++ C++ header only library
 
         $ cd ~/git
         $ git clone https://github.com/jmossberg/websocketpp-examples.git
+        $ cd websocketpp-examples
 
 1. Make shell scripts executable
 
@@ -24,6 +25,7 @@ Examples client and servers using WebSocket++ C++ header only library
 
         $ cd ~/git
         $ git clone https://github.com/jmossberg/websocketpp-examples.git
+        $ cd websocketpp-examples
 
 1. Make shell scripts executable
 
