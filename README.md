@@ -51,7 +51,7 @@ Examples client and servers using WebSocket++ C++ header only library
 
 # How to run WebSocket++ examples
 
-The examples below assume alternative 1 above was used, i.e. using Docker. Running the examples without Docker is similar.
+The examples below assume alternative 1 above was used, i.e. using Docker. Running the examples without Docker is similar. Just skip the commands that involve the `docker_websocketpp.sh` script.
 
 1. Start docker container and start the minimalistic server
 
