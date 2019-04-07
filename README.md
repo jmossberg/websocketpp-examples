@@ -6,11 +6,14 @@ Examples using WebSocket++ C++ header only library
 
 # Contents<a name="contents"></a>
 
-* [Alternative 1: How to build WebSocket++ examples using Docker](#alternative-1-how-to-build-websocket++-examples-using-docker)
-* [Alternative 2: How to build WebSocket++ examples on Ubuntu 18.04 without Docker](#alternative-2-how-to-build-websocket++-examples-on-ubuntu-1804-without-docker)
+* [How to build WebSocket++ examples](#how-to-build-websocket++-examples)
+    * [Alternative 1: Using Docker](#alternative-1-using-docker)
+    * [Alternative 2: Native on Ubuntu 18.04](#alternative-2-native-on-ubuntu-1804)
 * [How to run WebSocket++ examples](#how-to-run-websocket++-examples)
 
-# Alternative 1: How to build WebSocket++ examples using Docker<a name="alternative-1-how-to-build-websocket++-examples-using-docker"></a>
+# How to build WebSocket++ examples<a name="how-to-build-websocket++-examples"></a>
+
+## Alternative 1: Using Docker<a name="alternative-1-using-docker"></a>
 
 1. Install Docker: https://docs.docker.com/install/
 
@@ -28,7 +31,7 @@ Examples using WebSocket++ C++ header only library
 
         $ ./docker_websocketpp.sh build
 
-# Alternative 2: How to build WebSocket++ examples on Ubuntu 18.04 without Docker<a name="alternative-2-how-to-build-websocket++-examples-on-ubuntu-1804-without-docker"></a>
+## Alternative 2: Native on Ubuntu 18.04<a name="alternative-2-native-on-ubuntu-1804"></a>
 
 1. Clone this repository
 
