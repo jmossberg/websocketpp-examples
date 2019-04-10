@@ -1,0 +1,7 @@
+.vscode
+cert.pem
+key.pem
+websocketpp_chat_client
+websocketpp_chat_server
+websocketpp_client
+websocketpp_server
