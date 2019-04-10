@@ -22,10 +22,9 @@ void on_message(Server* server, std::vector<ConnectionHdl>* connections, Connect
                 websocketpp::config::asio::message_type::ptr msg) {
   std::cout << "on_message: " << msg->get_payload() << std::endl;
   for(auto& connection : *connections) {
-    if(connection.lock() == hdl.lock()) {
-      continue;
+    if(connection.lock() != hdl.lock()) {
+      server->send(connection, msg->get_payload(), websocketpp::frame::opcode::text);
     }
-    server->send(connection, msg->get_payload(), websocketpp::frame::opcode::text);
   }
 }
 
