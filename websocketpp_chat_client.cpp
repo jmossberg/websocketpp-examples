@@ -8,15 +8,12 @@ using websocketpp::lib::placeholders::_1;
 using websocketpp::lib::placeholders::_2;
 
 void send_message(Client* client, ConnectionHdl* connection, std::string msg) {
-  auto conn = client->get_con_from_hdl(*connection);
-  conn->send(msg);
+  client->send(*connection, msg, websocketpp::frame::opcode::text);
 }
 
 void close_connection(Client* client, ConnectionHdl* connection) {
-  auto conn = client->get_con_from_hdl(*connection);
-  conn->close(websocketpp::close::status::normal, "done");
+  client->close(*connection, websocketpp::close::status::normal, "done");
 }
-
 
 void on_message(Client* client, ConnectionHdl hdl,
                 websocketpp::config::asio_client::message_type::ptr msg) {
@@ -44,7 +41,8 @@ void set_message_handler(Client& client) {
 }
 
 void set_open_handler(Client& client, ConnectionHdl* connection) {
-  client.set_open_handler(websocketpp::lib::bind(&on_open, &client, connection, ::_1));
+  client.set_open_handler(
+      websocketpp::lib::bind(&on_open, &client, connection, ::_1));
 }
 
 void set_tls_init_handler(Client& client) {
@@ -74,28 +72,26 @@ int main(int argc, char* argv[]) {
 
   set_url(client, "ws://localhost:30001");
 
-  //client.run();
   websocketpp::lib::thread t1(&Client::run, &client);
 
   std::cout << "Name: ";
   std::getline(std::cin, name);
 
   while (!done) {
-      std::getline(std::cin, input);
-      if (input == "close") {
-        done = true;
-        close_connection(&client, &connection);
-      } else if (input == "help") {
-        std::cout
-            << "\nCommand List:\n"
-            << "close\n"
-            << "send <message>\n"
-            << "help: Display this help text\n"
-            << std::endl;
-      } else {
-        std::string msg{name + ": " + input};
-        send_message(&client, &connection, msg);
-      }
+    std::getline(std::cin, input);
+    if (input == "close") {
+      done = true;
+      close_connection(&client, &connection);
+    } else if (input == "help") {
+      std::cout << "\nCommand List:\n"
+                << "close\n"
+                << "send <message>\n"
+                << "help: Display this help text\n"
+                << std::endl;
+    } else {
+      std::string msg{name + ": " + input};
+      send_message(&client, &connection, msg);
+    }
   }
 
   t1.join();

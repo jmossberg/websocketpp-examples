@@ -8,17 +8,15 @@ using websocketpp::lib::placeholders::_1;
 using websocketpp::lib::placeholders::_2;
 
 void on_message(Client* client, ConnectionHdl hdl,
-  websocketpp::config::asio_client::message_type::ptr msg) {
+                websocketpp::config::asio_client::message_type::ptr msg) {
   std::cout << "on_message: " << msg->get_payload() << std::endl;
-  auto connection{client->get_con_from_hdl(hdl)};
-  connection->close(websocketpp::close::status::normal, "done");
+  client->close(hdl, websocketpp::close::status::normal, "done");
 }
 
 void on_open(Client* client, ConnectionHdl hdl) {
   std::string msg{"hello"};
   std::cout << "on_open: send " << msg << std::endl;
-  auto connection = client->get_con_from_hdl(hdl);
-  connection->send(msg);
+  client->send(hdl, msg, websocketpp::frame::opcode::text);
 }
 
 websocketpp::lib::shared_ptr<SslContext> on_tls_init() {
