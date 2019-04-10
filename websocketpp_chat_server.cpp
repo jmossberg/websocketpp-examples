@@ -9,15 +9,12 @@ using SslContext = websocketpp::lib::asio::ssl::context;
 using websocketpp::lib::placeholders::_1;
 using websocketpp::lib::placeholders::_2;
 
-bool equal_connection_hdl(Server * server, ConnectionHdl& a, ConnectionHdl& b) {
-  auto connection_a = server->get_con_from_hdl(a);
-  auto connection_b = server->get_con_from_hdl(b);
-
-  return connection_a == connection_b;
+bool equal_connection_hdl(ConnectionHdl& a, ConnectionHdl& b) {
+  return a.lock() == b.lock();
 }
 
-void remove_connection(Server * server, std::vector<ConnectionHdl>* connections, ConnectionHdl& hdl) {
-  auto equal_connection_hdl_predicate = std::bind(&equal_connection_hdl, server, hdl, ::_1);
+void remove_connection(std::vector<ConnectionHdl>* connections, ConnectionHdl& hdl) {
+  auto equal_connection_hdl_predicate = std::bind(&equal_connection_hdl, hdl, ::_1);
   connections->erase(std::remove_if(std::begin(*connections),std::end(*connections), equal_connection_hdl_predicate), std::end(*connections)); 
 }
 
@@ -25,7 +22,7 @@ void on_message(Server* server, std::vector<ConnectionHdl>* connections, Connect
                 websocketpp::config::asio::message_type::ptr msg) {
   std::cout << "on_message: " << msg->get_payload() << std::endl;
   for(auto& connection : *connections) {
-    if(equal_connection_hdl(server, hdl, connection)) {
+    if(connection.lock() == hdl.lock()) {
       continue;
     }
     server->send(connection, msg->get_payload(), websocketpp::frame::opcode::text);
@@ -40,7 +37,7 @@ void on_open(std::vector<ConnectionHdl>* connections, ConnectionHdl hdl) {
 
 void on_close(Server * server, std::vector<ConnectionHdl>* connections, ConnectionHdl hdl) {
   std::cout << "on_close" << std::endl;
-  remove_connection(server, connections, hdl);
+  remove_connection(connections, hdl);
   std::cout << "connections: " << connections->size() << std::endl;
 }
 
