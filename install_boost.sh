@@ -12,7 +12,7 @@ echo "Install Boost ${BOOST_VERSION} to ${BOOST_LIB_DIR}/boost_${BOOST_VERSION_U
 mkdir -p ${BOOST_SRC_DIR}
 mkdir -p ${BOOST_LIB_DIR} 
 
-wget https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/${BOOST_TAR_BZ2_FILE} --directory-prefix=${BOOST_SRC_DIR}
+wget https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/${BOOST_TAR_BZ2_FILE} --directory-prefix=${BOOST_SRC_DIR}
 tar -xj -C ${BOOST_SRC_DIR} -f ${BOOST_SRC_DIR}/${BOOST_TAR_BZ2_FILE}
 rm ${BOOST_SRC_DIR}/${BOOST_TAR_BZ2_FILE}
 pushd ${BOOST_SRC_DIR}/boost_${BOOST_VERSION_UNDERSCORE}
